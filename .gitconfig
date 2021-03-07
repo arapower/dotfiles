@@ -1,0 +1,6 @@
+[user]
+	email = slothwood@gmail.com
+	name = arapower
+[core]
+	pager = LESSCHARSET=utf-8 less
+	quotepath = false
