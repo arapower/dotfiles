@@ -1,4 +1,8 @@
 #!/bin/sh
 
-ln -s .vimrc ~/.vimrc
-ln -s .bashrc ~/.bashrc
+: "current_dir" && {
+	current_dir=$(d=${0%/*}/; [ "_$d" = "_$0/" ] && d='./'; cd "$d"; pwd)
+}
+
+ln -s "$current_dir/.vimrc" ~/.vimrc
+ln -s "$current_dir/.bashrc" ~/.bashrc
