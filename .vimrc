@@ -68,9 +68,10 @@ colorscheme molokai
 set t_Co=256
 
 " Markdownファイル
-if expand("%:t") =~ ".*\.md"
-  set expandtab
-endif
+autocmd FileType markdown setlocal expandtab
+" HTMLファイル
+autocmd FileType html setlocal expandtab
+
 syntax on
 colorscheme molokai
 set t_Co=256
@@ -79,3 +80,9 @@ set t_Co=256
 set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
 set undodir=~/.vim/tmp
+
+" ファイラー
+" netrwは常にtree view
+let g:netrw_liststyle = 3
+" netrwで行番号を表示
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
