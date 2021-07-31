@@ -8,3 +8,9 @@ export SCREENDIR=$HOME/.screen
 
 # directory for vim cache files
 [ -d ~/.vim/tmp ] || mkdir ~/.vim/tmp
+
+# ls: color
+alias ls='ls --color=auto'
+
+# grep: color
+alias grep='grep --color=auto'
