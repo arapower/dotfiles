@@ -14,3 +14,6 @@ alias ls='ls --color=auto'
 
 # grep: color
 alias grep='grep --color=auto'
+
+# Golang
+export PATH=$PATH:/usr/local/go/bin
