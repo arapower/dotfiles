@@ -71,6 +71,8 @@ set t_Co=256
 autocmd FileType markdown setlocal expandtab
 " HTMLファイル
 autocmd FileType html setlocal expandtab
+" CSSファイル
+autocmd FileType css setlocal noexpandtab
 
 syntax on
 colorscheme molokai
