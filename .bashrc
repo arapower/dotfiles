@@ -17,3 +17,9 @@ alias grep='grep --color=auto'
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
+
+# bookmark
+if [ -d "$HOME/.bookmarks" ]; then
+    export CDPATH=".:$HOME/.bookmarks:/"
+    alias goto="cd -P"
+fi
