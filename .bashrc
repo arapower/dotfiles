@@ -23,3 +23,7 @@ if [ -d "$HOME/.bookmarks" ]; then
     export CDPATH=".:$HOME/.bookmarks:/"
     alias goto="cd -P"
 fi
+
+alias tp="pushd $(mktemp -d)"
+alias tm="vi $(mktemp)"
+alias tpm="pushd $(mktemp -d) && vi $(mktemp)"
