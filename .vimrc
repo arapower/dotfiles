@@ -88,3 +88,7 @@ set undodir=~/.vim/tmp
 let g:netrw_liststyle = 3
 " netrwで行番号を表示
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
+" 以下のエラーに対処するために設定
+" `E363: pattern uses more memory than 'maxmempattern'`
+set mmp=5000
