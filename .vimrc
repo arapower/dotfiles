@@ -90,5 +90,11 @@ let g:netrw_liststyle = 3
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 " 以下のエラーに対処するために設定
-" `E363: pattern uses more memory than 'maxmempattern'`
+" - E363: pattern uses more memory than 'maxmempattern'
 set mmp=5000
+
+" BSで削除できるものを指定
+" indent  : 行頭の空白
+" eol     : 改行
+" start   : 挿入モード開始位置より手前の文字
+set backspace=indent,eol,start
