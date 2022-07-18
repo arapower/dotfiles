@@ -27,3 +27,9 @@ fi
 alias tp="pushd $(mktemp -d)"
 alias tm="vi $(mktemp)"
 alias tpm="pushd $(mktemp -d) && vi $(mktemp)"
+
+# Git commit messge with date command
+alias gcd='git commit -m "$(LANG=C date)"'
+
+# For Rust
+. "$HOME/.cargo/env"
