@@ -20,7 +20,9 @@ alias ls='ls -GF'
 alias grep='grep --color=auto'
 
 # Golang
-export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:/usr/local/go/bin"
+# User bin
+export PATH="$PATH:$HOME/bin"
 
 # bookmark
 if [ -d "$HOME/.bookmarks" ]; then
@@ -32,3 +34,6 @@ alias tp="pushd $(mktemp -d)"
 alias tm="vi $(mktemp)"
 alias tpm="pushd $(mktemp -d) && vi $(mktemp)"
 
+alias gcd='git commit -m "$(LANG=C date)"'
+# Git grep
+alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
