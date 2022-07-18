@@ -1,0 +1,29 @@
+# デフォルトエンコーディングをUTF8とする
+defutf8 on
+defencoding utf8
+encoding utf8 utf8
+
+# スタートアップメッセージをOFF
+startup_message off
+# Visual Bellをオフ
+vbell off
+
+# screen関連コマンドの開始キーバインド
+escape ^Tt
+
+## スクロール行数
+defscrollback 10000
+
+# マウススクロール有効
+# 別途、Mac標準ターミナルの「環境設定 > プロファイル > キーボード > 代替スクリーンをスクロール のチェックを外す
+termcapinfo xterm* ti@:te@
+
+# Vim、less等のスクリーンバッファを消す
+altscreen on
+
+defbce on
+term xterm-256color
+# ログ出力設定
+logfile /var/tmp/screen-log-%Y%m%d-%0c:%s.log
+logfile flush secs
+deflog on
