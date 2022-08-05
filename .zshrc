@@ -1,5 +1,8 @@
 setopt extended_history
 
+# Prompt
+export PS1="%n@%m %F{green}%C%f $ "
+
 # for nvm command
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
