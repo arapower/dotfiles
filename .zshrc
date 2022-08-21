@@ -33,9 +33,9 @@ if [ -d "$HOME/.bookmarks" ]; then
     alias goto="cd -P"
 fi
 
-alias tp="pushd \$(mktemp -d)"
-alias tm="vi \$(mktemp)"
-alias tpm="pushd \$(mktemp -d) && vi \$(mktemp)"
+alias tp='pushd $(mktemp -d)'
+alias tm='vi $(mktemp)'
+alias tpm='pushd $(mktemp -d) && vi $(mktemp)'
 
 alias gcd='git commit -m "$(LANG=C date)"'
 # Git grep
