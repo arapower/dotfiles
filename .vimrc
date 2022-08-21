@@ -67,6 +67,8 @@ syntax on
 colorscheme molokai
 set t_Co=256
 
+" Lispファイル
+autocmd FileType lisp setlocal expandtab
 " Markdownファイル
 autocmd FileType markdown setlocal expandtab
 " HTMLファイル
