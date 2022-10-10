@@ -33,3 +33,6 @@ alias gcd='git commit -m "$(LANG=C date)"'
 
 # For Rust
 . "$HOME/.cargo/env"
+
+# For tfenv
+export PATH=$PATH:$HOME/.tfenv/bin
