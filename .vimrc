@@ -37,6 +37,8 @@ set wildmode=list:longest
 " nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
+" ハイライト無効になる読み込み時間（ms）の設定(デフォルトは2000)
+set redrawtime=10000
 
 
 " Tab系
