@@ -40,3 +40,10 @@ alias tpm='pushd $(mktemp -d) && vi $(mktemp)'
 alias gcd='git commit -m "$(LANG=C date)"'
 # Git grep
 alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
+
+# AWS
+aws_p () {
+	export AWS_PROFILE="$1"
+}
+
+alias mpvl='mpv --loop --no-audio'
