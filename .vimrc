@@ -102,3 +102,8 @@ set mmp=5000
 " eol     : 改行
 " start   : 挿入モード開始位置より手前の文字
 set backspace=indent,eol,start
+
+" Foldingの状態を保持する
+autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+set viewoptions-=options
