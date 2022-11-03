@@ -17,6 +17,8 @@ alias grep='grep --color=auto'
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
+# User bin
+export PATH="$PATH:$HOME/bin"
 
 # bookmark
 if [ -d "$HOME/.bookmarks" ]; then
