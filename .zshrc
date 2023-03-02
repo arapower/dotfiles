@@ -21,6 +21,14 @@ alias ls='ls -GF'
 
 # grep: color
 alias grep='grep --color=auto'
+# grep: Exclude some directories
+alias grepe='grep --exclude-dir .git --exclude-dir .terraform --color=auto'
+
+# bat
+type bat > /dev/null
+[ $? -eq 0 ] && {
+	alias cat='bat --paging=never'
+}
 
 # Golang
 export PATH="$PATH:/usr/local/go/bin"
@@ -34,10 +42,11 @@ if [ -d "$HOME/.bookmarks" ]; then
 fi
 
 alias tp='pushd $(mktemp -d)'
-alias tm='vi $(mktemp)'
-alias tpm='pushd $(mktemp -d) && vi $(mktemp)'
+alias tm='vi $(mktemp).md'
+alias tpm='pushd $(mktemp -d) && vi $(mktemp).md'
 
 alias gcd='git commit -m "$(LANG=C date)"'
+alias git_push_f='git push --force-with-lease --force-if-includes'
 # Git grep
 alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
 
