@@ -50,6 +50,24 @@ alias git_push_f='git push --force-with-lease --force-if-includes'
 # Git grep
 alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
 
+# gh
+# 実行する
+gh_run(){
+	gh workflow run .github/workflows/$1 --ref $(git branch --show-current)
+}
+# 実行を見守る
+gh_watch(){
+	gh run list --workflow=$1 | grep $(git branch --show-current) | cut -f 7 | head -n 1 | xargs gh run watch
+}
+# 結果を確認
+gh_view(){
+	gh run list --workflow=$1 | grep $(git branch --show-current) | cut -f 7 | head -n 1 | xargs gh run view
+}
+# ログを確認
+gh_log(){
+	gh run list --workflow=$1 | grep $(git branch --show-current) | cut -f 7 | head -n 1 | xargs gh run view --log
+}
+
 # AWS
 aws_p () {
 	export AWS_PROFILE="$1"
