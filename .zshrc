@@ -49,6 +49,8 @@ alias gcd='git commit -m "$(LANG=C date)"'
 alias git_push_f='git push --force-with-lease --force-if-includes'
 # Git grep
 alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
+# Character-by-character diff
+alias odiff='git diff --word-diff=color --word-diff-regex=.'
 
 # gh
 # 実行する
