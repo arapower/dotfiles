@@ -107,3 +107,18 @@ set backspace=indent,eol,start
 autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
 autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 set viewoptions-=options
+
+" カスタムコマンド定義
+" ファイルをクリップボードにコピー
+command! -nargs=0 CCopy :execute "!cat % \| pbcopy"
+
+" 指定行番号（引数1〜引数2）の内容をクリップボードにコピー
+command! -nargs=+ SCopy :call SedCopy(<f-args>)
+
+function! SedCopy(arg1, arg2)
+  let command = "!sed -n '" . a:arg1 . "," . a:arg2 . "p' % | pbcopy"
+  execute command
+endfunction
+
+" Copilot
+let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}

@@ -32,6 +32,8 @@ type bat > /dev/null
 
 # Golang
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/go/bin"
+
 # User bin
 export PATH="$PATH:$HOME/bin"
 
@@ -76,3 +78,6 @@ aws_p () {
 }
 
 alias mpvl='mpv --loop --no-audio'
+
+# For Utterly
+alias utterly='sudo killall coreaudiod && sleep 1 && open -a utterly'
