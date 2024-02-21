@@ -110,14 +110,30 @@ set viewoptions-=options
 
 " カスタムコマンド定義
 " ファイルをクリップボードにコピー
-command! -nargs=0 CCopy :execute "!cat % \| pbcopy"
+command! -nargs=0 CCp :execute "!cat % \| pbcopy"
 
-" 指定行番号（引数1〜引数2）の内容をクリップボードにコピー
-command! -nargs=+ SCopy :call SedCopy(<f-args>)
+" 指定行番号（複数行の場合は 1,3 の形式で指定）の内容をクリップボードにコピー
+command! -nargs=+ SCp :call SedCopy(<f-args>)
 
-function! SedCopy(arg1, arg2)
-  let command = "!sed -n '" . a:arg1 . "," . a:arg2 . "p' % | pbcopy"
+function! SedCopy(arg)
+  let command = "!sed -n '" . a:arg . "p' % | pbcopy"
   execute command
+endfunction
+
+" 指定行番号（複数行の場合は 1,3 の形式で指定）の内容を標準出力する
+command! -nargs=+ Sp :call SedPrint(<f-args>)
+
+function! SedPrint(arg)
+  let command = "!sed -n '" . a:arg . "p' %"
+  execute command
+endfunction
+
+" ファイルのフルパスをクリップボードにコピー
+command! -nargs=0 FFp :call FullFilePath()
+
+function! FullFilePath()
+    let filePath = expand('%:p')
+        execute '!echo ' . shellescape(filePath) . ' | pbcopy'
 endfunction
 
 " Copilot
