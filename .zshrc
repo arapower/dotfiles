@@ -3,7 +3,7 @@ setopt extended_history
 # Prompt
 export PS1="%n@%m %F{green}%C%f $ "
 
-# for nvm command
+# For nvm command
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -23,6 +23,15 @@ alias ls='ls -GF'
 alias grep='grep --color=auto'
 # grep: Exclude some directories
 alias grepe='grep --exclude-dir .git --exclude-dir .terraform --color=auto'
+
+unzip_d(){
+	# Target Zipped (compressed) file
+	zip_file=$1
+	# Destination directory
+	dest_dir=$(mktemp -d)
+	ditto -x -k --sequesterRsrc --rsrc "${zip_file}" "${dest_dir}"
+	echo "${dest_dir}"
+}
 
 # bat
 type bat > /dev/null
@@ -79,5 +88,6 @@ aws_p () {
 
 alias mpvl='mpv --loop --no-audio'
 
-# For Utterly
-alias utterly='sudo killall coreaudiod && sleep 1 && open -a utterly'
+# For direnv
+eval "$(direnv hook zsh)"
+export PATH=$PATH:$HOME/.tfenv/bin
