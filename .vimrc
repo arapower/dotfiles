@@ -107,3 +107,37 @@ set backspace=indent,eol,start
 autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
 autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 set viewoptions-=options
+
+" カスタムコマンド定義
+" 指定行番号（複数行の場合は 1,3 の形式で指定）の行をMarkdownのURL修飾にする
+command! -nargs=1 Murl :<args>s/.*/\<&\>/
+
+" ファイルをクリップボードにコピー
+command! -nargs=0 CCp :execute "!cat % \| pbcopy"
+
+" 指定行番号（複数行の場合は 1,3 の形式で指定）の内容をクリップボードにコピー
+command! -nargs=+ SCp :call SedCopy(<f-args>)
+
+function! SedCopy(arg)
+  let command = "!sed -n '" . a:arg . "p' % | pbcopy"
+  execute command
+endfunction
+
+" 指定行番号（複数行の場合は 1,3 の形式で指定）の内容を標準出力する
+command! -nargs=+ Sp :call SedPrint(<f-args>)
+
+function! SedPrint(arg)
+  let command = "!sed -n '" . a:arg . "p' %"
+  execute command
+endfunction
+
+" ファイルのフルパスをクリップボードにコピー
+command! -nargs=0 FFp :call FullFilePath()
+
+function! FullFilePath()
+    let filePath = expand('%:p')
+        execute '!echo ' . shellescape(filePath) . ' | pbcopy'
+endfunction
+
+" Copilot
+let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
