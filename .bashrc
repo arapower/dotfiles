@@ -14,6 +14,8 @@ alias ls='ls --color=auto'
 
 # grep: color
 alias grep='grep --color=auto'
+# grep: Exclude some directories
+alias grepe='grep --exclude-dir .git --exclude-dir .terraform --color=auto'
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
