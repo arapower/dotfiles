@@ -113,13 +113,13 @@ set viewoptions-=options
 command! -nargs=1 Murl :<args>s/.*/\<&\>/
 
 " ファイルをクリップボードにコピー
-command! -nargs=0 CCp :execute "!cat % \| pbcopy"
+command! -nargs=0 CCp :execute "!cat '%' \| pbcopy"
 
 " 指定行番号（複数行の場合は 1,3 の形式で指定）の内容をクリップボードにコピー
 command! -nargs=+ SCp :call SedCopy(<f-args>)
 
 function! SedCopy(arg)
-  let command = "!sed -n '" . a:arg . "p' % | pbcopy"
+  let command = "!sed -n '" . a:arg . "p' '%' | pbcopy"
   execute command
 endfunction
 
@@ -127,7 +127,7 @@ endfunction
 command! -nargs=+ Sp :call SedPrint(<f-args>)
 
 function! SedPrint(arg)
-  let command = "!sed -n '" . a:arg . "p' %"
+  let command = "!sed -n '" . a:arg . "p' '%'"
   execute command
 endfunction
 
@@ -138,6 +138,17 @@ function! FullFilePath()
     let filePath = expand('%:p')
         execute '!echo ' . shellescape(filePath) . ' | pbcopy'
 endfunction
+
+" Markdown書式の見出しを出力する
+command! -nargs=0 Mh :call GrepMarkdownHeadings()
+
+function! GrepMarkdownHeadings()
+  let command = "grep '^\\#\\#* ' '%'"
+  execute command
+endfunction
+
+" '[ ]'のスペースが空白以外1文字の箇所を検索する
+command! -nargs=0 Sc :execute '/\[[^ ]\]'
 
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
