@@ -112,22 +112,55 @@ set viewoptions-=options
 " 指定行番号（複数行の場合は 1,3 の形式で指定）の行をMarkdownのURL修飾にする
 command! -nargs=1 Murl :<args>s/.*/\<&\>/
 
-" ファイルをクリップボードにコピー
-command! -nargs=0 CCp :execute "!cat '%' \| pbcopy"
+" ファイルの内容をクリップボードにコピー
+command! -nargs=0 CCp :call s:CopyFileToClipboard()
+
+function! s:CopyFileToClipboard()
+  " pbcopyコマンドが利用可能かどうかをチェック
+  let l:pbcopy_available = executable('pbcopy')
+  " wl-copyコマンドが利用可能かどうかをチェック
+  let l:wlcopy_available = executable('wl-copy')
+
+  " 実行するコマンドを選択
+  if l:pbcopy_available
+    let l:command = 'cat "%" | pbcopy'
+  elseif l:wlcopy_available
+    let l:command = 'cat "%" | wl-copy'
+  else
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+  endif
+
+  " コマンドを実行
+  execute '!'.l:command
+endfunction
 
 " 指定行番号（複数行の場合は 1,3 の形式で指定）の内容をクリップボードにコピー
 command! -nargs=+ SCp :call SedCopy(<f-args>)
 
 function! SedCopy(arg)
-  let command = "!sed -n '" . a:arg . "p' '%' | pbcopy"
-  execute command
+  " pbcopyコマンドが利用可能かどうかをチェック
+  let l:pbcopy_available = executable('pbcopy')
+  " wl-copyコマンドが利用可能かどうかをチェック
+  let l:wlcopy_available = executable('wl-copy')
+
+  " 実行するコマンドを選択
+  if l:pbcopy_available
+    let l:command = "sed -n '" . a:arg . "p' '%' | pbcopy"
+  elseif l:wlcopy_available
+    let l:command = "sed -n '" . a:arg . "p' '%' | wl-copy"
+  else
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+  endif
+
+  " コマンドを実行
+  execute '!'.l:command
 endfunction
 
 " 指定行番号（複数行の場合は 1,3 の形式で指定）の内容を標準出力する
 command! -nargs=+ Sp :call SedPrint(<f-args>)
 
 function! SedPrint(arg)
-  let command = "!sed -n '" . a:arg . "p' '%'"
+  let command = "!sed -n '" . a:arg . "p' %"
   execute command
 endfunction
 
@@ -135,20 +168,24 @@ endfunction
 command! -nargs=0 FFp :call FullFilePath()
 
 function! FullFilePath()
-    let filePath = expand('%:p')
-        execute '!echo ' . shellescape(filePath) . ' | pbcopy'
+  let filePath = expand('%:p')
+  " pbcopyコマンドが利用可能かどうかをチェック
+  let l:pbcopy_available = executable('pbcopy')
+  " wl-copyコマンドが利用可能かどうかをチェック
+  let l:wlcopy_available = executable('wl-copy')
+
+  " 実行するコマンドを選択
+  if l:pbcopy_available
+    let l:command = 'echo ' . shellescape(filePath) . ' | pbcopy'
+  elseif l:wlcopy_available
+    let l:command = 'echo ' . shellescape(filePath) . ' | wl-copy'
+  else
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+  endif
+
+  " コマンドを実行
+  execute '!'.l:command
 endfunction
-
-" Markdown書式の見出しを出力する
-command! -nargs=0 Mh :call GrepMarkdownHeadings()
-
-function! GrepMarkdownHeadings()
-  let command = "grep '^\\#\\#* ' '%'"
-  execute command
-endfunction
-
-" '[ ]'のスペースが空白以外1文字の箇所を検索する
-command! -nargs=0 Sc :execute '/\[[^ ]\]'
 
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}

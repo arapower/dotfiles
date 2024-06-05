@@ -35,6 +35,17 @@ alias tpm='pushd $(mktemp -d) && vi $(mktemp)'
 # Git commit messge with date command
 alias gcd='git commit -m "$(LANG=C date)"'
 
+# How to use: watch_file_changes "/path/to/directory"
+watch_file_changes() {
+	p=$(ls -l "$@")
+	while true; do
+		c=$(ls -l "$@")
+		[ "$p" != "$c" ] && echo "Changes detected"
+		p="$c"
+		sleep 1
+	done
+}
+
 # For Rust
 . "$HOME/.cargo/env"
 
