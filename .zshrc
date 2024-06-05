@@ -91,3 +91,17 @@ alias mpvl='mpv --loop --no-audio'
 # For direnv
 eval "$(direnv hook zsh)"
 export PATH=$PATH:$HOME/.tfenv/bin
+
+# How to use: watch_file_changes "/path/to/directory"
+watch_file_changes() {
+	p=$(ls -l "$@")
+	while true; do
+		c=$(ls -l "$@")
+		[ "$p" != "$c" ] && echo "Changes detected"
+		p="$c"
+		sleep 1
+	done
+}
+
+# For Rust
+. "$HOME/.cargo/env"
