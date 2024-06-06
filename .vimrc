@@ -187,5 +187,8 @@ function! FullFilePath()
   execute '!'.l:command
 endfunction
 
+" Markdown書式のヘッダーをリストアップする
+command! -nargs=0 Mh !grep -nh '^\#\#*' "%"
+
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
