@@ -90,7 +90,14 @@ alias mpvl='mpv --loop --no-audio'
 
 # For direnv
 eval "$(direnv hook zsh)"
+
+# For tfenv
 export PATH=$PATH:$HOME/.tfenv/bin
+export TFENV_AUTO_INSTALL=true
+
+# For tgenv
+export PATH=$PATH:$HOME/.tgenv/bin
+export TGENV_AUTO_INSTALL=true
 
 # How to use: watch_file_changes "/path/to/directory"
 watch_file_changes() {
