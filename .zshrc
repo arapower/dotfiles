@@ -22,7 +22,7 @@ alias ls='ls -GF'
 # grep: color
 alias grep='grep --color=auto'
 # grep: Exclude some directories
-alias grepe='grep --exclude-dir .git --exclude-dir .terraform --color=auto'
+alias grepe='grep --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --color=auto'
 
 unzip_d(){
 	# Target Zipped (compressed) file
@@ -90,6 +90,15 @@ alias mpvl='mpv --loop --no-audio'
 
 # For direnv
 eval "$(direnv hook zsh)"
+gh auth switch --user arapower
+GIT_AUTHOR_NAME='arapower'
+GIT_AUTHOR_EMAIL='slothwood@gmail.com'
+GIT_COMMITTER_NAME='arapower'
+GIT_COMMITTER_EMAIL='slothwood@gmail.com'
+export GIT_AUTHOR_NAME
+export GIT_AUTHOR_EMAIL
+export GIT_COMMITTER_NAME
+export GIT_COMMITTER_EMAIL
 
 # For tfenv
 export PATH=$PATH:$HOME/.tfenv/bin
