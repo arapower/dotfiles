@@ -63,6 +63,19 @@ alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
 # Character-by-character diff
 alias odiff='git diff --word-diff=color --word-diff-regex=.'
 
+# This function generates and executes git diff commands for pairs of commits
+# from the specified commit to HEAD.
+git_diff_pairs() {
+	local commit="$1"
+	[ -z "$commit" ] && echo "Usage: git_diff_pairs <commit>" && return 1
+	git log "${commit}^..HEAD" --oneline |
+	awk '{print $1}' |
+	sed -n "N;p;D" |
+	paste -d ' ' - - |
+	sed 's/\([^ ][^ ]*\) \([^ ][^ ]*\)/git diff \2..\1/' |
+	sh
+}
+
 # gh
 # 実行する
 gh_run(){
