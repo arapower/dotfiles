@@ -37,7 +37,7 @@ alias gcd='git commit -m "$(LANG=C date)"'
 
 # How to use: watch_file_changes "/path/to/directory"
 watch_file_changes() {
-	p=$(ls -l "$@")
+	p=$(ls -l --time-style=+%c "$@")
 	while true; do
 		c=$(ls -l "$@")
 		[ "$p" != "$c" ] && echo "Changes detected"
