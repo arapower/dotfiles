@@ -14,12 +14,23 @@ set showcmd
 
 
 " 見た目系
+"カラースキーム変更
+syntax on
+colorscheme molokai
+set t_Co=256
+
 " 行番号を表示
 set number
+" シンタックスハイライトの有効化
+syntax enable
+" ハイライト無効になる読み込み時間（ms）の設定(デフォルトは2000)
+set redrawtime=10000
 " 現在の行を強調表示
 set cursorline
+highlight CursorLine ctermbg=darkgray guibg=darkgray
 " 現在の行を強調表示（縦）
 set cursorcolumn
+highlight CursorColumn ctermbg=darkgray guibg=darkgray
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 " インデントはスマートインデント
@@ -35,10 +46,6 @@ set wildmode=list:longest
 " " 折り返し時に表示行単位での移動できるようにする
 " nnoremap j gj
 " nnoremap k gk
-" シンタックスハイライトの有効化
-syntax enable
-" ハイライト無効になる読み込み時間（ms）の設定(デフォルトは2000)
-set redrawtime=10000
 
 
 " Tab系
@@ -64,11 +71,6 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-"カラースキーム変更
-syntax on
-colorscheme molokai
-set t_Co=256
-
 " Lispファイル
 autocmd FileType lisp setlocal expandtab
 " Markdownファイル
@@ -77,10 +79,6 @@ autocmd FileType markdown setlocal expandtab
 autocmd FileType html setlocal expandtab
 " CSSファイル
 autocmd FileType css setlocal noexpandtab
-
-syntax on
-colorscheme molokai
-set t_Co=256
 
 " キャッシュファイルの保存ディレクトリ
 set directory=~/.vim/tmp
