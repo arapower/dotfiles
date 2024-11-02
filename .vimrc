@@ -27,10 +27,10 @@ syntax enable
 set redrawtime=10000
 " 現在の行を強調表示
 set cursorline
-highlight CursorLine ctermbg=darkgray guibg=darkgray
+"highlight CursorLine ctermbg=darkgray guibg=darkgray
 " 現在の行を強調表示（縦）
 set cursorcolumn
-highlight CursorColumn ctermbg=darkgray guibg=darkgray
+"highlight CursorColumn ctermbg=darkgray guibg=darkgray
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 " インデントはスマートインデント
@@ -118,14 +118,18 @@ function! s:CopyFileToClipboard()
   let l:pbcopy_available = executable('pbcopy')
   " wl-copyコマンドが利用可能かどうかをチェック
   let l:wlcopy_available = executable('wl-copy')
+  " clip.exeコマンドが利用可能かどうかをチェック
+  let l:clipexe_available = executable('clip.exe')
 
   " 実行するコマンドを選択
   if l:pbcopy_available
     let l:command = 'cat "%" | pbcopy'
   elseif l:wlcopy_available
     let l:command = 'cat "%" | wl-copy'
+  elseif l:clipexe_available
+    let l:command = 'cat "%" | iconv -t utf16 | clip.exe'
   else
-    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'', ''wl-copy'', or ''clip.exe'' command to be available."'
   endif
 
   " コマンドを実行
@@ -140,14 +144,18 @@ function! SedCopy(arg)
   let l:pbcopy_available = executable('pbcopy')
   " wl-copyコマンドが利用可能かどうかをチェック
   let l:wlcopy_available = executable('wl-copy')
+  " clip.exeコマンドが利用可能かどうかをチェック
+  let l:clipexe_available = executable('clip.exe')
 
   " 実行するコマンドを選択
   if l:pbcopy_available
     let l:command = "sed -n '" . a:arg . "p' '%' | pbcopy"
   elseif l:wlcopy_available
     let l:command = "sed -n '" . a:arg . "p' '%' | wl-copy"
+  elseif l:clipexe_available
+    let l:command = "sed -n '" . a:arg . "p' '%' | iconv -t utf16 | clip.exe"
   else
-    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'', ''wl-copy'', or ''clip.exe'' command to be available."'
   endif
 
   " コマンドを実行
