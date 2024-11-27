@@ -110,7 +110,7 @@ set viewoptions-=options
 
 " カスタムコマンド定義
 " 指定行番号（複数行の場合は 1,3 の形式で指定）の行をMarkdownのURL修飾にする
-command! -nargs=1 Murl :<args>s/.*/\<&\>/
+command! -nargs=1 Murl :<args>s/..*/\<&\>/
 
 " Markdownの完了タスクを検索する
 command! -nargs=0 Mc :/\[[^ ]]
@@ -191,7 +191,7 @@ function! FullFilePath()
 endfunction
 
 " Markdown書式のヘッダーをリストアップする
-command! -nargs=0 Mh !grep -nh '^\#\#*' "%"
+command! -nargs=0 Mh !grep -nh '^\#\#\#*' "%"
 
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
