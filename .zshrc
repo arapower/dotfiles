@@ -22,7 +22,7 @@ alias ls='ls -GF'
 # grep: color
 alias grep='grep --color=auto'
 # grep: Exclude some directories
-alias grepe='grep --exclude-dir .git --exclude-dir .terraform --color=auto'
+alias grepe='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --color=auto'
 
 unzip_d(){
 	# Target Zipped (compressed) file
@@ -63,6 +63,28 @@ alias ggrep='git rev-list --all | xargs git grep --heading --line-number -10'
 # Character-by-character diff
 alias odiff='git diff --word-diff=color --word-diff-regex=.'
 
+# This function generates and executes git diff commands for pairs of commits
+# from the specified commit to HEAD.
+git_diff_pairs() {
+	local commit="$1"
+	[ -z "$commit" ] && echo "Usage: git_diff_pairs <commit>" && return 1
+	git log "${commit}^..HEAD" --oneline |
+	awk '{print $1}' |
+	sed -n "N;p;D" |
+	paste -d ' ' - - |
+	awk '{
+		lines[NR] = $0
+	}
+	
+	END {
+		for (i = NR; i >= 1; i--) {
+			print lines[i]
+		}
+	}' |
+	sed 's/\([^ ][^ ]*\) \([^ ][^ ]*\)/git diff \2..\1/' |
+	sh
+}
+
 # gh
 # 実行する
 gh_run(){
@@ -90,4 +112,34 @@ alias mpvl='mpv --loop --no-audio'
 
 # For direnv
 eval "$(direnv hook zsh)"
+gh auth switch --user arapower
+GIT_AUTHOR_NAME='arapower'
+GIT_AUTHOR_EMAIL='slothwood@gmail.com'
+GIT_COMMITTER_NAME='arapower'
+GIT_COMMITTER_EMAIL='slothwood@gmail.com'
+export GIT_AUTHOR_NAME
+export GIT_AUTHOR_EMAIL
+export GIT_COMMITTER_NAME
+export GIT_COMMITTER_EMAIL
+
+# For tfenv
 export PATH=$PATH:$HOME/.tfenv/bin
+export TFENV_AUTO_INSTALL=true
+
+# For tgenv
+export PATH=$PATH:$HOME/.tgenv/bin
+export TGENV_AUTO_INSTALL=true
+
+# How to use: watch_file_changes "/path/to/directory"
+watch_file_changes() {
+	p=$(ls -l "$@")
+	while true; do
+		c=$(ls -l "$@")
+		[ "$p" != "$c" ] && echo "Changes detected"
+		p="$c"
+		sleep 1
+	done
+}
+
+# For Rust
+. "$HOME/.cargo/env"
