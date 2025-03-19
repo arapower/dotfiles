@@ -22,7 +22,7 @@ alias ls='ls -GF'
 # grep: color
 alias grep='grep --color=auto'
 # grep: Exclude some directories
-alias grepe='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --color=auto'
+alias grepe='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --exclude-dir target --color=auto'
 
 unzip_d(){
 	# Target Zipped (compressed) file

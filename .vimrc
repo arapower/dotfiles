@@ -75,6 +75,8 @@ filetype plugin indent on
 autocmd FileType lisp setlocal expandtab
 " Markdownファイル
 autocmd FileType markdown setlocal expandtab
+" SQLファイル
+autocmd FileType sql setlocal expandtab
 " HTMLファイル
 autocmd FileType html setlocal expandtab
 " CSSファイル
