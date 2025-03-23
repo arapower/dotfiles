@@ -111,8 +111,8 @@ if [ -d "$HOME/.bookmarks" ]; then
 fi
 
 alias tp='pushd $(mktemp -d)'
-alias tm='vi $(mktemp)'
-alias tpm='pushd $(mktemp -d) && vi $(mktemp)'
+alias tm='vi $(mktemp).md'
+alias tpm='pushd $(mktemp -d) && vi $(mktemp).md'
 
 # Git commit messge with date command
 alias gcd='git commit -m "$(LANG=C date)"'
