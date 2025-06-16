@@ -64,6 +64,10 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+" 操作系
+" 'Ctrl + a'でインクリメントする対象
+set nrformats=alpha
+
 "カラースキーム変更
 syntax on
 colorscheme molokai
@@ -199,3 +203,11 @@ command! -nargs=0 Mh !grep -nh '^\#\#\#*' "%"
 
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
+
+" vim-lsp
+" カーソル下のシンボルの参照箇所を検索する
+nmap gr :LspReferences<CR>
+" カーソル下のシンボルの定義場所にジャンプする
+nmap gd :LspDefinition<CR>
+" カーソル下のシンボルのホバー情報を表示する
+nmap gk :LspHover<CR>
