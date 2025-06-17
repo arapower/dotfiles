@@ -22,7 +22,7 @@ alias ls='ls -GF'
 # grep: color
 alias grep='grep --color=auto'
 # grep: Exclude some directories
-alias grepe='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --color=auto'
+alias grepe='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --exclude-dir target --color=auto'
 
 unzip_d(){
 	# Target Zipped (compressed) file
@@ -88,7 +88,9 @@ git_diff_pairs() {
 # gh
 # 実行する
 gh_run(){
-	gh workflow run .github/workflows/$1 --ref $(git branch --show-current)
+	workflow_file="$1"
+	shift
+	gh workflow run .github/workflows/${workflow_file} --ref $(git branch --show-current) "$@"
 }
 # 実行を見守る
 gh_watch(){
@@ -109,6 +111,7 @@ aws_p () {
 }
 
 alias mpvl='mpv --loop --no-audio'
+alias coffee='caffeinate -d'
 
 # For direnv
 eval "$(direnv hook zsh)"

@@ -15,15 +15,14 @@ set showcmd
 filetype plugin indent on
 
 " 見た目系
+" シンタックスハイライトの有効化
+syntax enable
 "カラースキーム変更
-syntax on
 colorscheme molokai
 set t_Co=256
 
 " 行番号を表示
 set number
-" シンタックスハイライトの有効化
-syntax enable
 " ハイライト無効になる読み込み時間（ms）の設定(デフォルトは2000)
 set redrawtime=10000
 " 現在の行を強調表示
@@ -72,10 +71,16 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+" 操作系
+" 'Ctrl + a'でインクリメントする対象
+set nrformats=alpha
+
 " Lispファイル
 autocmd FileType lisp setlocal expandtab
 " Markdownファイル
 autocmd FileType markdown setlocal expandtab
+" SQLファイル
+autocmd FileType sql setlocal expandtab
 " HTMLファイル
 autocmd FileType html setlocal expandtab
 " CSSファイル
@@ -206,6 +211,14 @@ command! -nargs=0 Mh !grep -nh '^\#\#\#*' "%"
 
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
-
+"
 "llama.vim
 let g:llama_config = { 'show_info': 0 }
+
+" vim-lsp
+" カーソル下のシンボルの参照箇所を検索する
+nmap gr :LspReferences<CR>
+" カーソル下のシンボルの定義場所にジャンプする
+nmap gd :LspDefinition<CR>
+" カーソル下のシンボルのホバー情報を表示する
+nmap gk :LspHover<CR>
