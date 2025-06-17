@@ -10,4 +10,5 @@
 	git clone https://github.com/prabirshrestha/asyncomplete-lsp.vim.git ~/.vim/pack/plugins/start/asyncomplete-lsp.vim
 	git clone https://github.com/prabirshrestha/vim-lsp.git ~/.vim/pack/plugins/start/vim-lsp
 	git clone https://github.com/rust-lang/rust.vim.git ~/.vim/pack/plugins/start/rust.vim
+	git clone https://github.com/ggml-org/llama.vim ~/.vim/pack/plugins/start/llama.vim
 }

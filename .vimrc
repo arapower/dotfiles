@@ -12,6 +12,7 @@ set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
 
+filetype plugin indent on
 
 " 見た目系
 "カラースキーム変更
@@ -182,14 +183,18 @@ function! FullFilePath()
   let l:pbcopy_available = executable('pbcopy')
   " wl-copyコマンドが利用可能かどうかをチェック
   let l:wlcopy_available = executable('wl-copy')
+  " clip.exeコマンドが利用可能かどうかをチェック
+  let l:clipexe_available = executable('clip.exe')
 
   " 実行するコマンドを選択
   if l:pbcopy_available
     let l:command = 'echo ' . shellescape(filePath) . ' | pbcopy'
   elseif l:wlcopy_available
     let l:command = 'echo ' . shellescape(filePath) . ' | wl-copy'
+  elseif l:clipexe_available
+    let l:command = 'cat "%" | iconv -t utf16 | clip.exe'
   else
-    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'', ''wl-copy'', or ''clip.exe'' command to be available."'
   endif
 
   " コマンドを実行
@@ -201,3 +206,6 @@ command! -nargs=0 Mh !grep -nh '^\#\#\#*' "%"
 
 " Copilot
 let g:copilot_filetypes = {'*': v:true, 'markdown': v:true}
+
+"llama.vim
+let g:llama_config = { 'show_info': 0 }
