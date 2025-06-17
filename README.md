@@ -32,7 +32,7 @@ $ mkdir ~/.bookmarks
 
 ```sh
 # Install
-$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+$ PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 ```
 
 ## bat
@@ -40,8 +40,13 @@ $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bas
 - <https://github.com/sharkdp/bat>
 
 ```sh
-# Install
+# Install on macOS
 $ brew install bat
+
+# Install on Ubuntu
+$ sudo apt install bat
+$ mkdir -p ~/bin
+$ ln -s /usr/bin/batcat ~/bin/bat
 ```
 
 ## mpv

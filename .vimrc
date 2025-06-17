@@ -14,12 +14,21 @@ set showcmd
 
 
 " 見た目系
+" シンタックスハイライトの有効化
+syntax enable
+"カラースキーム変更
+colorscheme molokai
+set t_Co=256
+
 " 行番号を表示
 set number
+" ハイライト無効になる読み込み時間（ms）の設定(デフォルトは2000)
+set redrawtime=10000
 " 現在の行を強調表示
 set cursorline
 " 現在の行を強調表示（縦）
 set cursorcolumn
+"highlight CursorColumn ctermbg=darkgray guibg=darkgray
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 " インデントはスマートインデント
@@ -35,10 +44,6 @@ set wildmode=list:longest
 " " 折り返し時に表示行単位での移動できるようにする
 " nnoremap j gj
 " nnoremap k gk
-" シンタックスハイライトの有効化
-syntax enable
-" ハイライト無効になる読み込み時間（ms）の設定(デフォルトは2000)
-set redrawtime=10000
 
 
 " Tab系
@@ -68,11 +73,6 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " 'Ctrl + a'でインクリメントする対象
 set nrformats=alpha
 
-"カラースキーム変更
-syntax on
-colorscheme molokai
-set t_Co=256
-
 filetype plugin indent on
 
 " Lispファイル
@@ -85,10 +85,6 @@ autocmd FileType sql setlocal expandtab
 autocmd FileType html setlocal expandtab
 " CSSファイル
 autocmd FileType css setlocal noexpandtab
-
-syntax on
-colorscheme molokai
-set t_Co=256
 
 " キャッシュファイルの保存ディレクトリ
 set directory=~/.vim/tmp
@@ -131,14 +127,18 @@ function! s:CopyFileToClipboard()
   let l:pbcopy_available = executable('pbcopy')
   " wl-copyコマンドが利用可能かどうかをチェック
   let l:wlcopy_available = executable('wl-copy')
+  " clip.exeコマンドが利用可能かどうかをチェック
+  let l:clipexe_available = executable('clip.exe')
 
   " 実行するコマンドを選択
   if l:pbcopy_available
     let l:command = 'cat "%" | pbcopy'
   elseif l:wlcopy_available
     let l:command = 'cat "%" | wl-copy'
+  elseif l:clipexe_available
+    let l:command = 'cat "%" | iconv -t utf16 | clip.exe'
   else
-    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'', ''wl-copy'', or ''clip.exe'' command to be available."'
   endif
 
   " コマンドを実行
@@ -153,14 +153,18 @@ function! SedCopy(arg)
   let l:pbcopy_available = executable('pbcopy')
   " wl-copyコマンドが利用可能かどうかをチェック
   let l:wlcopy_available = executable('wl-copy')
+  " clip.exeコマンドが利用可能かどうかをチェック
+  let l:clipexe_available = executable('clip.exe')
 
   " 実行するコマンドを選択
   if l:pbcopy_available
     let l:command = "sed -n '" . a:arg . "p' '%' | pbcopy"
   elseif l:wlcopy_available
     let l:command = "sed -n '" . a:arg . "p' '%' | wl-copy"
+  elseif l:clipexe_available
+    let l:command = "sed -n '" . a:arg . "p' '%' | iconv -t utf16 | clip.exe"
   else
-    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'' or ''wl-copy'' command to be available."'
+    let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'', ''wl-copy'', or ''clip.exe'' command to be available."'
   endif
 
   " コマンドを実行

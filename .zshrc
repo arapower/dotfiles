@@ -33,18 +33,18 @@ unzip_d(){
 	echo "${dest_dir}"
 }
 
-# bat
-type bat > /dev/null
-[ $? -eq 0 ] && {
-	alias cat='bat --paging=never'
-}
-
 # Golang
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/go/bin"
 
 # User bin
 export PATH="$PATH:$HOME/bin"
+
+# bat
+type bat > /dev/null
+[ $? -eq 0 ] && {
+	alias cat='bat --paging=never'
+}
 
 # bookmark
 if [ -d "$HOME/.bookmarks" ]; then
