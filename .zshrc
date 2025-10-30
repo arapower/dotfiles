@@ -22,7 +22,7 @@ alias ls='ls -GF'
 # grep: color
 alias grep='grep --color=auto'
 # grep: Exclude some directories
-alias grepe='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --exclude-dir target --color=auto'
+alias grepe="grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir .terragrunt-cache --exclude-dir target --exclude-dir __pycache__ --color=auto --exclude-dir __pycache__ --exclude-dir '.*_cache' --exclude-dir .venv --exclude-dir dist"
 
 unzip_d(){
 	# Target Zipped (compressed) file
@@ -31,6 +31,12 @@ unzip_d(){
 	dest_dir=$(mktemp -d)
 	ditto -x -k --sequesterRsrc --rsrc "${zip_file}" "${dest_dir}"
 	echo "${dest_dir}"
+}
+
+# bat
+type bat > /dev/null
+[ $? -eq 0 ] && {
+	alias cat='bat --paging=never'
 }
 
 # Golang
@@ -115,11 +121,11 @@ alias coffee='caffeinate -d'
 
 # For direnv
 eval "$(direnv hook zsh)"
-gh auth switch --user arapower
-GIT_AUTHOR_NAME='arapower'
-GIT_AUTHOR_EMAIL='slothwood@gmail.com'
-GIT_COMMITTER_NAME='arapower'
-GIT_COMMITTER_EMAIL='slothwood@gmail.com'
+gh auth switch --user cs-masahiroaraki
+GIT_AUTHOR_NAME='cs-masahiroaraki'
+GIT_AUTHOR_EMAIL='masahiro.araki@cancerscan.jp'
+GIT_COMMITTER_NAME='cs-masahiroaraki'
+GIT_COMMITTER_EMAIL='masahiro.araki@cancerscan.jp'
 export GIT_AUTHOR_NAME
 export GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_NAME
