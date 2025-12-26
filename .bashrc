@@ -94,6 +94,7 @@ alias grepe='grep --exclude-dir .git --exclude-dir .terraform --color=auto'
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # User bin
 export PATH="$PATH:$HOME/bin"
@@ -133,3 +134,6 @@ watch_file_changes() {
 
 # For tfenv
 export PATH=$PATH:$HOME/.tfenv/bin
+
+# For uv
+. "$HOME/.local/bin/env"
