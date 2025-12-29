@@ -197,7 +197,7 @@ function! FullFilePath()
   elseif l:wlcopy_available
     let l:command = 'echo ' . shellescape(filePath) . ' | wl-copy'
   elseif l:clipexe_available
-    let l:command = 'cat "%" | iconv -t utf16 | clip.exe'
+    let l:command = 'echo ' . shellescape(filePath) . ' | clip.exe'
   else
     let l:command = 'echo "[ERROR] This command requires either the ''pbcopy'', ''wl-copy'', or ''clip.exe'' command to be available."'
   endif
