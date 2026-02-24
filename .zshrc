@@ -152,3 +152,9 @@ watch_file_changes() {
 
 # For Rust
 . "$HOME/.cargo/env"
+
+# Connect Dev Container
+alias devcon='docker exec -it $(docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}" | awk "/vsc-/{print \$1}") bash'
+
+# Gemini
+alias gemini='gemini -s'
