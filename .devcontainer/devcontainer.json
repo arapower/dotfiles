@@ -1,0 +1,34 @@
+{
+  "name": "Node.js Vite Dev",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node",
+  "features": {
+    // gh CLI（GitHub CLI）のインストール
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Rust ツールチェーン（rustup / rustc / cargo）と wasm32 ターゲット
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "stable",
+      "targets": "wasm32-unknown-unknown"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
+        "vitejs.vite"
+      ]
+    }
+  },
+  "mounts": [
+    // WSL2 の gh CLI 認証情報をコンテナに共有（読み取り専用）
+    // ${localEnv:HOME} は WSL2 のホームディレクトリに解決される
+    "source=${localEnv:HOME}/.config/gh,target=/home/node/.config/gh,type=bind,readonly"
+  ],
+  "postStartCommand": "node --version && npm --version",
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": {
+      "label": "Vite Dev Server"
+    }
+  }
+}
